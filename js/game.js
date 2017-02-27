@@ -76,12 +76,26 @@ if(lives == undefined){
 	localStorage.setItem("lives", 3);
 }
 
-var nStones = 1;
+var nStones = localStorage.getItem("nStones");
+if(nStones == undefined){
+	nStones = 1;
+	localStorage.setItem("nStones", 1);
+}
+
 var stones = [];
 
-var nMonsters = 1;
+var nMonsters = localStorage.getItem("nMonsters");
+if(nMonsters == undefined){
+	nMonsters = 1;
+	localStorage.setItem("nMonsters", 1);
+}
 var monsters = [];
-var monsterSpeed = 64;
+
+var monsterSpeed = localStorage.getItem("monsterSpeed");
+if(monsterSpeed == undefined){
+	monsterSpeed = 64;
+	localStorage.setItem("monsterSpeed", 64);
+}
 
 // Handle keyboard controls
 var keysDown = {};
@@ -261,9 +275,13 @@ var monsterMovement = function(modifier){
 }
 
 var levelUP = function(){
-	nStones++;
-	nMonsters++;
-	monsterSpeed += 32;
+	++nStones;
+	localStorage.setItem("nStones", nStones);
+	++nMonsters;
+	localStorage.setItem("nMonsters", nMonsters);
+	monsterSpeed = monsterSpeed + 32;
+	localStorage.setItem("monsterSpeed", monsterSpeed);
+
 }
 // Update game objects
 var update = function (modifier) {
@@ -293,6 +311,7 @@ var update = function (modifier) {
 	// Are they touching?
 	if (touchingPrincess(hero, princess)) {
 		++princessesCaught;
+		console.log(monsterSpeed);
 		localStorage.setItem("princessesCaught", princessesCaught);
 		if((princessesCaught % 10) == 0){
 			levelUP();
@@ -361,12 +380,16 @@ document.getElementById("btn").onclick = function() {
 
 /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
 function newGame() {
-    princessesCaught = 0;
+  princessesCaught = 0;
 	localStorage.setItem("princessesCaught", princessesCaught);
 	lives = 3;
 	localStorage.setItem("lives", lives);
 	nStones = 1;
+	localStorage.setItem("nStones", nStones);
 	nMonsters = 1;
+	localStorage.setItem("nMonsters", nMonsters);
+	monsterSpeed = 64;
+	localStorage.setItem("monsterSpeed", monsterSpeed);
 	localStorage.clear();
 	reset();
 }
