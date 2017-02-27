@@ -286,7 +286,7 @@ var update = function (modifier) {
 		hero.x += hero.speed * modifier;
 		}
 	}
-	
+
 	touchingMargen(hero);
 	monsterMovement(modifier);
 
@@ -339,7 +339,7 @@ var render = function () {
 			ctx.drawImage(monsterImage, monsters[j].x, monsters[j].y);
 		}
 	}
-	
+
 	if (gameOverReady) {
 		if(lives == 0){
 			ctx.drawImage(gameOverImage, 150, 160);
