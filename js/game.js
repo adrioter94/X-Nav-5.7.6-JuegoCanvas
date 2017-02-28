@@ -306,14 +306,14 @@ var update = function (modifier) {
 	}
 
 	touchingMargen(hero);
-	monsterMovement(modifier);
-
+	if(lives != 0){
+			monsterMovement(modifier);
+	}
 	// Are they touching?
 	if (touchingPrincess(hero, princess)) {
 		++princessesCaught;
-		console.log(monsterSpeed);
 		localStorage.setItem("princessesCaught", princessesCaught);
-		if((princessesCaught % 10) == 0){
+		if((princessesCaught % 5) == 0){
 			levelUP();
 		}
 		reset();
